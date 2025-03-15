@@ -29,12 +29,14 @@ function mostrarPresupuesto() {
     }
     return gasto;
 }*/
-function CrearGasto(valor) {
+function CrearGasto(descripcion, valor) {
     if (valor >= 0) {
         this.valor = valor;
     } else {
         this.valor = 0;
     }
+
+    this.descripcion = descripcion;
 }
 
 // NO MODIFICAR A PARTIR DE AQUÍ: exportación de funciones y objetos creados para poder ejecutar los tests.
