@@ -19,3 +19,33 @@ gestionPresupuesto.anyadirGasto(gasto3);
 gestionPresupuesto.anyadirGasto(gasto4);
 gestionPresupuesto.anyadirGasto(gasto5);
 gestionPresupuesto.anyadirGasto(gasto6);
+
+const totalGastos = gestionPresupuesto.calcularTotalGastos();
+gestionPresupuestoWeb.mostrarDatoEnId("gastos-totales", totalGastos);
+
+const balanceTotal = gestionPresupuesto.calcularBalance();
+gestionPresupuestoWeb.mostrarDatoEnId("balance-total", balanceTotal);
+
+const listadoGastos = gestionPresupuesto.listarGastos();
+gestionPresupuestoWeb.mostrarGastoWeb("listado-gastos-completo", listadoGastos);
+
+const gastosSeptiembre2021 = gestionPresupuesto.filtrarGastos("2021-09");
+gestionPresupuestoWeb.mostrarGastoWeb("listado-gastos-filtrado-1", gastosSeptiembre2021);
+
+const gastosMayoresDe50 = gestionPresupuesto.filtrarGastos(50);
+gestionPresupuestoWeb.mostrarGastoWeb("listado-gastos-filtrado-2", gastosMayoresDe50);
+
+const gastosMayoresDe200ConSeguros = gestionPresupuesto.filtrarGastos(200, "seguros");
+gestionPresupuestoWeb.mostrarGastoWeb("listado-gastos-filtrado-3", gastosMayoresDe200ConSeguros);
+
+const gastosFiltrados = gestionPresupuesto.filtrarGastos();
+gestionPresupuestoWeb.mostrarGastoWeb("listado-gastos-filtrado-4", gastosFiltrados);
+
+const gastosAgrupados = agruparGastos('dia');
+mostrarGastosAgrupadosWeb('agrupacion-dia', gastosAgrupados, 'dia');
+
+const gastosAgrupadosPorMes = agruparGastos('mes');
+mostrarGastosAgrupadosWeb('agrupacion-mes', gastosAgrupadosPorMes, 'mes');
+
+const gastosAgrupadosPorAnyo = agruparGastos('año');
+mostrarGastosAgrupadosWeb('agrupacion-anyo', gastosAgrupadosPorAnyo, 'año');
