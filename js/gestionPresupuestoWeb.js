@@ -1,0 +1,10 @@
+
+
+
+
+
+export { 
+    mostrarDatoEnId, 
+    mostrarGastoWeb, 
+    mostrarGastosAgrupadosWeb 
+}
