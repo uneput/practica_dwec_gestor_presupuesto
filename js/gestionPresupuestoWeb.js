@@ -112,6 +112,23 @@ EditarHandle.prototype.handleEvent = function () {
     repintar();
 };
 
+function BorrarHandle(gasto) {
+    this.gasto = gasto;
+}
+BorrarHandle.prototype.handleEvent = function () {
+    borrarGasto(this.gasto.id);
+    repintar();
+};
+
+function BorrarEtiquetasHandle(gasto, etiqueta) {
+    this.gasto = gasto;
+    this.etiqueta = etiqueta;
+}
+BorrarEtiquetasHandle.prototype.handleEvent = function () {
+    this.gasto.borrarEtiquetas(this.etiqueta);
+    repintar();
+};
+
 
 /*const botonActualizarPresupuesto = document.getElementById('actualizarpresupuesto');
 if (botonActualizarPresupuesto) {
