@@ -66,8 +66,25 @@ function repintar() {
     }
 }
 
+function actualizarPresupuestoWeb() {
+    const nuevoPresupuesto = prompt('Introduce el nuevo presupuesto:');
+    const presupuestoValor = parseFloat(nuevoPresupuesto);
+    if (!isNaN(presupuestoValor) && presupuestoValor >= 0) {
+        presupuesto.actualizarPresupuesto(presupuestoValor);
+        repintar();
+    } else {
+        alert('Por favor, introduce un valor numérico válido para el presupuesto.');
+    }
+}
 
 
+
+/*const botonActualizarPresupuesto = document.getElementById('actualizarpresupuesto');
+if (botonActualizarPresupuesto) {
+    botonActualizarPresupuesto.addEventListener('click', actualizarPresupuestoWeb);
+}*/
+const botonActualizarPresupuesto = document.getElementById('actualizarpresupuesto');
+botonActualizarPresupuesto.addEventListener('click', actualizarPresupuestoWeb);
 
 export { 
     mostrarDatoEnId, 
