@@ -1,3 +1,4 @@
+import * as presupuesto from 'js/gestionPresupuesto.js';
 
 function mostrarDatoEnId(idElemento, valor){
     let elemento= document.getElementById(idElemento);
