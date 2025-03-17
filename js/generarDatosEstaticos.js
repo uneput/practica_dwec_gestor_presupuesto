@@ -26,8 +26,12 @@ gestionPresupuestoWeb.mostrarDatoEnId("gastos-totales", totalGastos);
 const balanceTotal = gestionPresupuesto.calcularBalance();
 gestionPresupuestoWeb.mostrarDatoEnId("balance-total", balanceTotal);
 
+/*const listadoGastos = gestionPresupuesto.listarGastos();
+gestionPresupuestoWeb.mostrarGastoWeb("listado-gastos-completo", listadoGastos);*/
 const listadoGastos = gestionPresupuesto.listarGastos();
-gestionPresupuestoWeb.mostrarGastoWeb("listado-gastos-completo", listadoGastos);
+listadoGastos.forEach(gasto => {
+    gestionPresupuestoWeb.mostrarGastoWeb("listado-gastos-completo", gasto);
+});
 
 const gastosSeptiembre2021 = gestionPresupuesto.filtrarGastos("2021-09");
 gestionPresupuestoWeb.mostrarGastoWeb("listado-gastos-filtrado-1", gastosSeptiembre2021);
