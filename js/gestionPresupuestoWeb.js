@@ -77,6 +77,20 @@ function actualizarPresupuestoWeb() {
     }
 }
 
+function nuevoGastoWeb() {
+    const descripcion = prompt('Introduce la descripción del gasto:');
+    const valor = parseFloat(prompt('Introduce el valor del gasto:'));
+    const fecha = prompt('Introduce la fecha del gasto (yyyy-mm-dd):');
+    const etiquetasInput = prompt('Introduce las etiquetas separadas por comas (ej. etiqueta1,etiqueta2):');
+    
+    const etiquetas = etiquetasInput.split(',').map(etiqueta => etiqueta.trim()).filter(etiqueta => etiqueta !== "");
+
+    const nuevoGasto = presupuesto.CrearGasto(descripcion, valor, fecha, ...etiquetas);
+
+    presupuesto.anyadirGasto(nuevoGasto);
+
+    repintar();
+}
 
 
 /*const botonActualizarPresupuesto = document.getElementById('actualizarpresupuesto');
@@ -85,6 +99,9 @@ if (botonActualizarPresupuesto) {
 }*/
 const botonActualizarPresupuesto = document.getElementById('actualizarpresupuesto');
 botonActualizarPresupuesto.addEventListener('click', actualizarPresupuestoWeb);
+
+const botonAñadirGasto = document.getElementById('anyadirgasto');
+botonAñadirGasto.addEventListener('click', nuevoGastoWeb);
 
 export { 
     mostrarDatoEnId, 
