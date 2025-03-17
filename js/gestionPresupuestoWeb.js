@@ -92,6 +92,26 @@ function nuevoGastoWeb() {
     repintar();
 }
 
+function EditarHandle(gasto) {
+    this.gasto = gasto;
+}
+
+EditarHandle.prototype.handleEvent = function () {
+    const nuevaDescripcion = prompt("Introduce la nueva descripción:", this.gasto.descripcion);
+    const nuevoValor = parseFloat(prompt("Introduce el nuevo valor:", this.gasto.valor));
+    const nuevaFecha = prompt("Introduce la nueva fecha (yyyy-mm-dd):", this.gasto.fecha);
+    const etiquetasInput = prompt("Introduce las nuevas etiquetas separadas por comas:", this.gasto.etiquetas.join(", "));
+
+    const nuevasEtiquetas = etiquetasInput.split(',').map(etiqueta => etiqueta.trim()).filter(etiqueta => etiqueta !== "");
+
+    this.gasto.actualizarDescripcion(nuevaDescripcion);
+    this.gasto.actualizarValor(nuevoValor);
+    this.gasto.actualizarFecha(nuevaFecha);
+    this.gasto.anyadirEtiquetas(nuevasEtiquetas);
+
+    repintar();
+};
+
 
 /*const botonActualizarPresupuesto = document.getElementById('actualizarpresupuesto');
 if (botonActualizarPresupuesto) {
