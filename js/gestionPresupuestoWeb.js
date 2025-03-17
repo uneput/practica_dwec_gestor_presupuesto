@@ -45,6 +45,27 @@ function mostrarGastosAgrupadosWeb(idElemento, agrup, periodo) {
     contenedor.appendChild(divAgrupacion);
 }
 
+function repintar() {
+    const presupuestoActual = presupuesto.mostrarPresupuesto();
+    mostrarDatoEnId('presupuesto', presupuestoActual);
+
+    const totalGastos = presupuesto.calcularTotalGastos();
+    mostrarDatoEnId('gastos-totales', `Total de gastos: ${totalGastos} €`);
+    
+    const balanceTotal = presupuesto.calcularBalance();
+    mostrarDatoEnId('balance-total', `Balance actual: ${balanceTotal} €`);
+    
+    const listadoGastos = document.getElementById('listado-gastos-completo');
+    if (listadoGastos) {
+        listadoGastos.innerHTML = '';
+    }
+    
+    const gastos = presupuesto.listarGastos();
+    for (let i = 0; i < gastos.length; i++) {
+        mostrarGastoWeb('listado-gastos-completo', gastos[i]);
+    }
+}
+
 
 
 
