@@ -21,6 +21,34 @@ function mostrarGastoWeb(idElemento, gasto){
             ${gasto.etiquetas.map(etiqueta => `<span class="gasto-etiquetas-etiqueta">${etiqueta}</span>`).join('')}
         </div>
     `;
+    
+     // botón Editar
+     const botonEditar = document.createElement('button');
+     botonEditar.classList.add('gasto-editar');
+     botonEditar.textContent = 'Editar';
+     botonEditar.type = 'button';
+
+     const editarHandle = new EditarHandle(gasto);
+     botonEditar.addEventListener('click', editarHandle);
+
+     // botón Borrar
+    const botonBorrar = document.createElement('button');
+    botonBorrar.classList.add('gasto-borrar');
+    botonBorrar.textContent = 'Borrar';
+    botonBorrar.type = 'button';
+
+    const borrarHandle = new BorrarHandle(gasto);
+    botonBorrar.addEventListener('click', borrarHandle);
+
+    divGasto.appendChild(botonEditar);
+    divGasto.appendChild(botonBorrar);
+
+    const etiquetas = divGasto.querySelectorAll('.gasto-etiquetas-etiqueta');
+    for (let i = 0; i < etiquetas.length; i++) {
+        const etiquetaSpan = etiquetas[i];
+        const borrarEtiquetaHandle = new BorrarEtiquetasHandle(gasto, etiquetaSpan.textContent);
+        etiquetaSpan.addEventListener('click', borrarEtiquetaHandle);
+    }
   
     contenedor.appendChild(divGasto);
 }
