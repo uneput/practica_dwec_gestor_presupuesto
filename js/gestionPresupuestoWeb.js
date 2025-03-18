@@ -200,7 +200,6 @@ function ManejadorCancelarNuevoGastoWForm(formulario, botonAñadirGasto) {
     this.formulario = formulario;
     this.botonAñadirGasto = botonAñadirGasto;
 }
-
 ManejadorCancelarNuevoGastoWForm.prototype.handleEvent = function(event) {
     this.formulario.remove(); // Eliminar el formulario
     this.botonAñadirGasto.disabled = false; // Reactivar el botón de añadir gasto
