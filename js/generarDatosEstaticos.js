@@ -33,7 +33,7 @@ listadoGastos.forEach(gasto => {
     gestionPresupuestoWeb.mostrarGastoWeb("listado-gastos-completo", gasto);
 });
 
-const gastosSeptiembre2021 = gestionPresupuesto.filtrarGastos("2021-09");
+/*const gastosSeptiembre2021 = gestionPresupuesto.filtrarGastos("2021-09");
 gestionPresupuestoWeb.mostrarGastoWeb("listado-gastos-filtrado-1", gastosSeptiembre2021);
 
 const gastosMayoresDe50 = gestionPresupuesto.filtrarGastos(50);
@@ -52,4 +52,4 @@ const gastosAgrupadosPorMes = agruparGastos('mes');
 mostrarGastosAgrupadosWeb('agrupacion-mes', gastosAgrupadosPorMes, 'mes');
 
 const gastosAgrupadosPorAnyo = agruparGastos('año');
-mostrarGastosAgrupadosWeb('agrupacion-anyo', gastosAgrupadosPorAnyo, 'año');
+mostrarGastosAgrupadosWeb('agrupacion-anyo', gastosAgrupadosPorAnyo, 'año');*/

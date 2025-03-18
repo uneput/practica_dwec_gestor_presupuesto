@@ -1,4 +1,4 @@
-import * as presupuesto from 'js/gestionPresupuesto.js';
+import * as presupuesto from 'gestionPresupuesto.js';
 
 function mostrarDatoEnId(idElemento, valor){
     let elemento= document.getElementById(idElemento);
@@ -40,8 +40,18 @@ function mostrarGastoWeb(idElemento, gasto){
     const borrarHandle = new BorrarHandle(gasto);
     botonBorrar.addEventListener('click', borrarHandle);
 
+    //botón Editar Formulario
+    const botonEditarFormulario = document.createElement('button');
+    botonEditarFormulario.classList.add('gasto-editar-formulario');
+    botonEditarFormulario.textContent = 'Editar (formulario)';
+    botonEditarFormulario.type = 'button';
+
+    const editarFormularioHandle = new EditarHandleformulario(gasto);
+    botonEditarFormulario.addEventListener('click', editarFormularioHandle);
+
     divGasto.appendChild(botonEditar);
     divGasto.appendChild(botonBorrar);
+    divGasto.appendChild(botonEditarFormulario);
 
     const etiquetas = divGasto.querySelectorAll('.gasto-etiquetas-etiqueta');
     for (let i = 0; i < etiquetas.length; i++) {
@@ -53,7 +63,7 @@ function mostrarGastoWeb(idElemento, gasto){
     contenedor.appendChild(divGasto);
 }
 
-function mostrarGastosAgrupadosWeb(idElemento, agrup, periodo) {
+/*function mostrarGastosAgrupadosWeb(idElemento, agrup, periodo) {
     //hace referencia a la practica 5
     const contenedor = document.getElementById(idElemento);
   
@@ -71,7 +81,7 @@ function mostrarGastosAgrupadosWeb(idElemento, agrup, periodo) {
     `;
   
     contenedor.appendChild(divAgrupacion);
-}
+}*/
 
 function repintar() {
     const presupuestoActual = presupuesto.mostrarPresupuesto();
@@ -113,7 +123,7 @@ function nuevoGastoWeb() {
     
     const etiquetas = etiquetasInput.split(',').map(etiqueta => etiqueta.trim()).filter(etiqueta => etiqueta !== "");
 
-    const nuevoGasto = presupuesto.CrearGasto(descripcion, valor, fecha, ...etiquetas);
+    const nuevoGasto = new presupuesto.CrearGasto(descripcion, valor, fecha, ...etiquetas);
 
     presupuesto.anyadirGasto(nuevoGasto);
 
@@ -183,7 +193,7 @@ function BorrarHandle(gasto) {
     this.gasto = gasto;
 }
 BorrarHandle.prototype.handleEvent = function () {
-    borrarGasto(this.gasto.id);
+    presupuesto.borrarGasto(this.gasto.id);
     repintar();
 };
 
