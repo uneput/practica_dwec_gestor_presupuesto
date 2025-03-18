@@ -206,6 +206,38 @@ BorrarEtiquetasHandle.prototype.handleEvent = function () {
     repintar();
 };
 
+function EditarHandleFormulario(gasto) {
+    this.gasto = gasto;
+}
+
+EditarHandleFormulario.prototype.handleEvent = function () {
+    const formulario = document.createElement('form');
+    formulario.innerHTML = `
+        <input type="text" name="descripcion" value="${this.gasto.descripcion}" required>
+        <input type="number" name="valor" value="${this.gasto.valor}" required>
+        <input type="date" name="fecha" value="${this.gasto.fecha}" required>
+        <input type="text" name="etiquetas" value="${this.gasto.etiquetas.join(', ')}">
+        <button type="submit">Guardar</button>
+        <button type="button" class="cancelar">Cancelar</button>
+    `;
+
+    formulario.addEventListener('submit', (event) => {
+        event.preventDefault();
+
+        this.gasto.actualizarDescripcion(formulario.descripcion.value);
+        this.gasto.actualizarValor(parseFloat(formulario.valor.value));
+        this.gasto.actualizarFecha(formulario.fecha.value);
+        this.gasto.anyadirEtiquetas(formulario.etiquetas.value.split(',').map(e => e.trim()).filter(e => e !== ""));
+
+        repintar();
+    });
+    formulario.querySelector('.cancelar').addEventListener('click', new CancelarHandleFormulario(formulario));
+
+    const contenedor = document.getElementById('formulario-contenedor');
+    contenedor.innerHTML = '';
+    contenedor.appendChild(formulario);
+};
+
 function ManejadorCancelarNuevoGastoWForm(formulario, botonAñadirGasto) {
     this.formulario = formulario;
     this.botonAñadirGasto = botonAñadirGasto;
