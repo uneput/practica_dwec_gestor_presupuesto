@@ -1,4 +1,4 @@
-import * as presupuesto from 'gestionPresupuesto.js';
+import * as presupuesto from './gestionPresupuesto.js';
 
 function mostrarDatoEnId(idElemento, valor){
     let elemento= document.getElementById(idElemento);
@@ -46,7 +46,7 @@ function mostrarGastoWeb(idElemento, gasto){
     botonEditarFormulario.textContent = 'Editar (formulario)';
     botonEditarFormulario.type = 'button';
 
-    const editarFormularioHandle = new EditarHandleformulario(gasto);
+    const editarFormularioHandle = new EditarHandleFormulario(gasto);
     botonEditarFormulario.addEventListener('click', editarFormularioHandle);
 
     divGasto.appendChild(botonEditar);
@@ -231,9 +231,9 @@ EditarHandleFormulario.prototype.handleEvent = function () {
 
         repintar();
     });
-    formulario.querySelector('.cancelar').addEventListener('click', new CancelarHandleFormulario(formulario));
+    formulario.querySelector('.cancelar').addEventListener('click', new ManejadorCancelarNuevoGastoWForm(formulario));
 
-    const contenedor = document.getElementById('formulario-contenedor');
+    const contenedor = document.getElementById('controlesprincipales');
     contenedor.innerHTML = '';
     contenedor.appendChild(formulario);
 };
@@ -260,5 +260,5 @@ botonAñadirGastoFormulario.addEventListener('click', nuevoGastoWebFormulario);
 export { 
     mostrarDatoEnId, 
     mostrarGastoWeb, 
-    mostrarGastosAgrupadosWeb 
+    /*mostrarGastosAgrupadosWeb*/
 }
