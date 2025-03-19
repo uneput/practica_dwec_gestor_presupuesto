@@ -169,6 +169,29 @@ function nuevoGastoWebFormulario(event) {
     controlesPrincipales.appendChild(plantillaFormulario);
 }
 
+function cargarGastosApi() {
+    const nombreUsuario = document.getElementById('nombre_usuario').value.trim();    
+    /*if (!nombreUsuario) {
+        alert('Por favor, introduce un nombre de usuario.');
+        return;
+    }*/
+
+    const url = `https://suhhtqjccd.execute-api.eu-west-1.amazonaws.com/latest/${nombreUsuario}`;
+
+    fetch(url)
+        .then(response => response.json())
+        .then(gastos => {
+            cargarGastos(gastos);
+            repintar();
+        })
+        .catch(error => {
+            console.error('Error al cargar los gastos:', error);
+            alert('Hubo un error al cargar los gastos desde la API.');
+        });       
+}
+
+document.getElementById('cargar-gastos-api').addEventListener('click', cargarGastosApi);
+
 function EditarHandle(gasto) {
     this.gasto = gasto;
 }
