@@ -307,6 +307,49 @@ EditarHandleFormulario.prototype.handleEvent = function () {
 
         repintar();
     });
+
+    formulario.querySelector('.gasto-enviar-api').addEventListener('click', () => {
+        const nombreUsuario = document.getElementById('nombre_usuario').value.trim();
+        if (!nombreUsuario) {
+            alert('Por favor, introduce un nombre de usuario.');
+            return;
+        }
+
+        const descripcion = formulario.querySelector('[name="descripcion"]').value;
+        const valor = parseFloat(formulario.querySelector('[name="valor"]').value);
+        const fecha = formulario.querySelector('[name="fecha"]').value;
+        const etiquetasInput = formulario.querySelector('[name="etiquetas"]').value;
+        const etiquetas = etiquetasInput.split(',').map(etiqueta => etiqueta.trim()).filter(etiqueta => etiqueta !== "");
+
+        const gastoActualizado = {
+            descripcion: descripcion,
+            valor: valor,
+            fecha: fecha,
+            etiquetas: etiquetas
+        };
+
+        const url = `https://suhhtqjccd.execute-api.eu-west-1.amazonaws.com/latest/${nombreUsuario}/${this.gasto.gastoId}`;
+
+        fetch(url, {
+            method: 'PUT',
+            headers: {
+                'Content-Type': 'application/json'
+            },
+            body: JSON.stringify(gastoActualizado)
+        })
+        .then(response => {
+            if (response.ok) {
+                cargarGastosApi();
+                formulario.remove();
+            }else {
+                alert('Error al actualizar el gasto.');
+            }
+        })
+        .catch(error => {
+            alert('Error al intentar actualizar el gasto: ' + error);
+        })
+    });
+
     formulario.querySelector('.cancelar').addEventListener('click', new ManejadorCancelarNuevoGastoWForm(formulario));
 
     const contenedor = document.getElementById('controlesprincipales');
