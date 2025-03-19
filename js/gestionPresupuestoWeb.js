@@ -40,6 +40,15 @@ function mostrarGastoWeb(idElemento, gasto){
     const borrarHandle = new BorrarHandle(gasto);
     botonBorrar.addEventListener('click', borrarHandle);
 
+    //botón borrar API
+    const botonBorrarApi = document.createElement('button');
+    botonBorrarApi.classList.add('gasto-borrar-api');
+    botonBorrarApi.textContent = 'Borrar (API)';
+    botonBorrarApi.type = 'button';
+
+    const borrarApiHandle = new BorrarHandleApi(gasto);
+    botonBorrarApi.addEventListener('click', borrarApiHandle);
+
     //botón Editar Formulario
     const botonEditarFormulario = document.createElement('button');
     botonEditarFormulario.classList.add('gasto-editar-formulario');
@@ -51,6 +60,7 @@ function mostrarGastoWeb(idElemento, gasto){
 
     divGasto.appendChild(botonEditar);
     divGasto.appendChild(botonBorrar);
+    divGasto.appendChild(botonBorrarApi);
     divGasto.appendChild(botonEditarFormulario);
 
     const etiquetas = divGasto.querySelectorAll('.gasto-etiquetas-etiqueta');
