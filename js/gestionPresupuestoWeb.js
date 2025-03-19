@@ -295,6 +295,7 @@ EditarHandleFormulario.prototype.handleEvent = function () {
         <input type="text" name="etiquetas" value="${this.gasto.etiquetas.join(', ')}">
         <button type="submit">Guardar</button>
         <button type="button" class="cancelar">Cancelar</button>
+        <button type="button" class="gasto-enviar-api">Enviar API</button>
     `;
 
     formulario.addEventListener('submit', (event) => {
@@ -352,7 +353,7 @@ EditarHandleFormulario.prototype.handleEvent = function () {
 
     formulario.querySelector('.cancelar').addEventListener('click', new ManejadorCancelarNuevoGastoWForm(formulario));
 
-    const contenedor = document.getElementById('controlesprincipales');
+    const contenedor = document.getElementById('listado-gastos-completo');
     contenedor.innerHTML = '';
     contenedor.appendChild(formulario);
 };
