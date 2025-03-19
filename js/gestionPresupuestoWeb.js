@@ -271,6 +271,48 @@ EditarHandleFormulario.prototype.handleEvent = function () {
     contenedor.appendChild(formulario);
 };
 
+function BorrarHandleApi(gasto) {
+    this.gasto = gasto;
+}
+
+BorrarHandleApi.prototype.handleEvent = function () {
+
+    const nombreUsuario = document.getElementById('nombre_usuario').value.trim();
+
+    if (!nombreUsuario) {
+        alert('Por favor, introduce un nombre de usuario.');
+        return;
+    }
+
+    const gastoId = this.gasto.gastoId;
+    if (!gastoId) {
+        alert('No se pudo obtener el ID del gasto.');
+        return;
+    }
+
+    const url = `https://suhhtqjccd.execute-api.eu-west-1.amazonaws.com/latest/${nombreUsuario}/${gastoId}`;
+
+    fetch(url, {
+        method: 'DELETE',
+        headers: {
+            'Content-Type': 'application/json',
+        },
+    })
+    .then(response => {
+        if (!response.ok) {
+            throw new Error('No se pudo eliminar el gasto.');
+        }
+        return response.json();
+    })
+    .then(() => {
+        cargarGastosApi();
+    })
+    .catch(error => {
+        console.error('Error eliminando el gasto:', error);
+        alert('Hubo un error al intentar eliminar el gasto.');
+    });
+};
+
 function ManejadorCancelarNuevoGastoWForm(formulario, botonAñadirGasto) {
     this.formulario = formulario;
     this.botonAñadirGasto = botonAñadirGasto;
