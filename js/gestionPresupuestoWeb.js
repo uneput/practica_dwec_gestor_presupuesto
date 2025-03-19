@@ -160,11 +160,54 @@ function nuevoGastoWebFormulario(event) {
         const nuevoGasto = presupuesto.CrearGasto(descripcion, valor, fecha, ...etiquetas);
         presupuesto.anyadirGasto(nuevoGasto);
 
-        repintar();
+        //repintar();
 
         botonAñadirGasto.disabled = false;
 
         formulario.remove();
+    });
+
+    const botonEnviar = formulario.querySelector('.gasto-enviar-api');
+    botonEnviar.addEventListener('click', function() {
+        const nombreUsuario = document.getElementById('nombre_usuario').value.trim();
+
+        if (!nombreUsuario) {
+            alert('Por favor, introduce un nombre de usuario.');
+            return;
+        }
+
+        const descripcion = formulario.querySelector('#descripcion').value;
+        const valor = parseFloat(formulario.querySelector('#valor').value);
+        const fecha = formulario.querySelector('#fecha').value;
+        const etiquetasInput = formulario.querySelector('#etiquetas').value;
+        const etiquetas = etiquetasInput.split(',').map(etiqueta => etiqueta.trim()).filter(etiqueta => etiqueta !== "");
+
+        const nuevoGasto = {
+            descripcion: descripcion,
+            valor: valor,
+            fecha: fecha,
+            etiquetas: etiquetas
+        };
+
+        const url = `https://suhhtqjccd.execute-api.eu-west-1.amazonaws.com/latest/${nombreUsuario}`;
+
+        fetch(url, {
+            method: 'POST',
+            headers: {
+                'Content-Type': 'application/json'
+            },
+            body: JSON.stringify(nuevoGasto)
+        })
+        .then(response => {
+            if (response.ok) {
+                cargarGastosApi();
+            } else {
+                alert('Error al enviar el gasto.');
+            }
+        })
+        .catch(error => {
+            alert('Error al intentar enviar el gasto: ' + error);
+        });
     });
 
     /*const cancelarButton = formulario.querySelector('button.cancelar');
