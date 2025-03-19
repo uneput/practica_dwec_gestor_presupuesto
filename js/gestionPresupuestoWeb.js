@@ -354,7 +354,7 @@ EditarHandleFormulario.prototype.handleEvent = function () {
     formulario.querySelector('.cancelar').addEventListener('click', new ManejadorCancelarNuevoGastoWForm(formulario));
 
     const contenedor = document.getElementById('listado-gastos-completo');
-    contenedor.innerHTML = '';
+    //contenedor.innerHTML = '';
     contenedor.appendChild(formulario);
 };
 
